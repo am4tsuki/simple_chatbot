@@ -7,28 +7,33 @@ def clear():
    else:
       _ = system('clear')
 
-# insert your api-key here
-openai.api_key = "insert here"
+clear()
+# insert you apikey here!
+openai.api_key = "insert here dod"
 
-def chat(prompts):
+a = ""
+x = None
+ai = 'AI: '
+you = 'You: '
+
+print("\033[96mSimple OpenAI Chatbot like ChatGPT")
+print('\033[96mType q to quit!\n')
+
+while x != 'q':
+   x = input('\033[92m' + you)
+   a += you + x + '\n' + ai
    response = openai.Completion.create(
       model="text-davinci-003",
-      prompt=prompts,
-      temperature=0,
-      max_tokens=1000
+      prompt=a,
+      temperature=1.0,
+      max_tokens=1024,
+      top_p=1,
+      frequency_penalty=0.0,
+      presence_penalty=1.0,
+      stop=[" You:", " AI:"]
    )
-   print(f'\033[96mOpenAI  : {response["choices"][0]["text"].strip()}')
+   res = ai + response.choices[0].text.strip()
+   a += res
+   print('\033[96m' + res)
 
-clear()
-u = None
-print('Simple OpenAI Chatbot by powz')
-print('Type q to quit!\n')
-
-while True:
-   u = input("\033[92mYou     : ")
-   if u.lower() == 'q':
-      break
-   else:
-      chat(u)
-
-print('Program finished!')
+print('Program Exit!')
